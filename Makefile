@@ -2,11 +2,14 @@
 
 all: findings opus_testvectors ffmpeg afl
 
-afl: afl-1.92b
+AFL_VERSION=1.92b
 
-afl-1.92b:
+afl: afl-$(AFL_VERSION)
+
+afl-$(AFL_VERSION):
 	wget -q http://lcamtuf.coredump.cx/afl/releases/$@.tgz
 	tar xf $@.tgz
+	$(MAKE) -C $@
 
 findings:
 	mkdir $@
@@ -30,5 +33,5 @@ distclean: clean
 	$(RM) -r findings
 	$(RM) -r opus_testvectors
 	$(RM) -r ffmpeg
-	$(RM) -r afl-1.92b
-	$(RM) afl-1.92b.tgz
+	$(RM) -r afl-$(AFL_VERSION)
+	$(RM) afl-$(AFL_VERSION).tgz
