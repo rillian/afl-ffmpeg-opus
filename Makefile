@@ -17,7 +17,7 @@ findings:
 # Grab opus versions of the spec testsuite as a starting point.
 opus_testvectors:
 	mkdir $@
-	cd $@ && for v in $$(seq 12); do \
+	cd $@ && for v in $$(seq -w 12); do \
 	  wget -q https://people.xiph.org/~greg/opus_testvectors/testvector$${v}.bit.opus; \
 	  done
   
