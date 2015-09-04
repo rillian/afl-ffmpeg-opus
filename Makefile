@@ -2,7 +2,7 @@
 
 all: findings opus_testvectors ffmpeg afl
 
-AFL_VERSION=1.92b
+AFL_VERSION = 1.92b
 
 afl: afl-$(AFL_VERSION)
 
