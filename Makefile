@@ -17,17 +17,14 @@ findings:
 # Grab opus versions of the spec testsuite as a starting point.
 opus_testvectors:
 	mkdir $@
-	cd $@
-	for v in $$(seq 12); do \
+	cd $@ && for v in $$(seq 12); do \
 	  wget -q https://people.xiph.org/~greg/opus_testvectors/testvector$${v}.bit.opus; \
 	  done
-	cd ..
   
 CC=afl-$(AFL_VERSION)/afl-gcc
 ffmpeg: afl
 	git clone https://github.com/FFmpeg/ffmpeg $@
-	cd $@
-	./configure --disable-everything --enable-encoder=pcm_s16le --enable-muxer=wav --enable-decoder=opus --enable-parser=opus --enable-demuxer=ogg --enable-filter=aresample --enable-protocol=file --enable-protocol=pipe
+	cd $@ && ./configure --disable-everything --enable-encoder=pcm_s16le --enable-muxer=wav --enable-decoder=opus --enable-parser=opus --enable-demuxer=ogg --enable-filter=aresample --enable-protocol=file --enable-protocol=pipe
 	cd ..
 	make -C $@
 
