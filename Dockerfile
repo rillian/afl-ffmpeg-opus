@@ -15,5 +15,5 @@ RUN useradd -d $HOME -m $USER
 WORKDIR $HOME
 USER $USER
 
-ADD Makefile /home/worker/Makefile
+ADD Makefile ./
 RUN make
