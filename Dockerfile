@@ -17,3 +17,5 @@ USER $USER
 
 ADD Makefile ./
 RUN make
+
+CMD make test

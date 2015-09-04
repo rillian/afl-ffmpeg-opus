@@ -4,6 +4,11 @@ all: findings opus_testvectors ffmpeg afl
 
 AFL_VERSION = 1.92b
 
+test:
+	afl-$(AFL_VERSION)/afl-fuzz -i opus_testvectors \
+	  -o findings -- \
+	  ffmpeg/ffmpeg -i @@ -acodec pcm_s16le -f wav -
+
 afl: afl-$(AFL_VERSION)
 
 afl-$(AFL_VERSION):
