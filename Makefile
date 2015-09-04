@@ -24,3 +24,11 @@ ffmpeg:
 	git clone https://github.com/FFmpeg/ffmpeg
 
 
+clean:
+
+distclean: clean
+	$(RM) -r findings
+	$(RM) -r opus_testvectors
+	$(RM) -r ffmpeg
+	$(RM) -r afl-1.92b
+	$(RM) afl-1.92b.tgz
