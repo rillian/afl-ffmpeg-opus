@@ -1,4 +1,4 @@
-FROM ubuntu:14:04
+FROM debian:latest
 
 MAINTAINER Ralph Giles <giles@thaumas.net>
 
@@ -8,7 +8,5 @@ RUN apt-get update && apt-get upgrade -y
 # install deps
 RUN apt-get install -y git make gcc yasm wget
 
-RUN wget http://lcamtuf.coredump.cx/afl/releases/afl-1.92b.tgz
-RUN tar xf afl-1.92.tgz
-
-RUN git clone https://github.com/FFmpeg/ffmpeg
+ADD Makefile /tmp/Makefile
+RUN make -f /tmp/Makefile
