@@ -23,11 +23,18 @@ opus_testvectors:
 	  done
 	cd ..
   
-ffmpeg:
-	git clone https://github.com/FFmpeg/ffmpeg
+CC=afl-$(AFL_VERSION)/afl-gcc
+ffmpeg: afl
+	git clone https://github.com/FFmpeg/ffmpeg $@
+	cd $@
+	./configure --disable-everything --enable-encoder=pcm_s16le --enable-muxer=wav --enable-decoder=opus --enable-parser=opus --enable-demuxer=ogg --enable-filter=aresample --enable-protocol=file --enable-protocol=pipe
+	cd ..
+	make -C $@
 
 
 clean:
+	-$(MAKE) -C ffmpeg $@
+	-$(MAKE) -C afl-$(AFL_VERSION) $@
 
 distclean: clean
 	$(RM) -r findings
