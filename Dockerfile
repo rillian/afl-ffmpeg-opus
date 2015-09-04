@@ -8,5 +8,12 @@ RUN apt-get update && apt-get upgrade -y
 # install deps
 RUN apt-get install -y git make gcc yasm wget
 
-ADD Makefile /tmp/Makefile
-RUN make -f /tmp/Makefile
+# set up non-root user
+ENV USER worker
+ENV HOME /home/$USER
+RUN useradd -d $HOME -m $USER
+WORKDIR $HOME
+USER $USER
+
+ADD Makefile /home/worker/Makefile
+RUN make
