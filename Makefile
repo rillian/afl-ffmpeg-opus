@@ -21,12 +21,11 @@ opus_testvectors:
 	  wget -q https://people.xiph.org/~greg/opus_testvectors/testvector$${v}.bit.opus; \
 	  done
   
-CC=afl-$(AFL_VERSION)/afl-gcc
 ffmpeg: afl
 	git clone https://github.com/FFmpeg/ffmpeg $@
 	cd $@ && ./configure --disable-everything --enable-encoder=pcm_s16le --enable-muxer=wav --enable-decoder=opus --enable-parser=opus --enable-demuxer=ogg --enable-filter=aresample --enable-protocol=file --enable-protocol=pipe
 	cd ..
-	make -C $@
+	make -C $@ CC=$${PWD}/afl-$(AFL_VERSION)/afl-gcc
 
 
 clean:
